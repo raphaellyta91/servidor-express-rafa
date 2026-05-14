@@ -1,22 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cursos</title>
+    <title>Lista de Cursos</title>
 </head>
+
 <body>
-    <h1>Cursos Disponíveis</h1>
+
+    <h1>Lista de Cursos</h1>
+
     <% cursos.forEach(curso => { %>
-        <div>
-            Curso: <%= curso.curso %>
-            <ul>
-                <li>código: <%= curso.cod %></li>              
-                <li>Carga Horária: <%= curso.ch %></li>
-                <li>Tipo: <%= curso.tipo %></li>
-            </ul>
-        </div>
+
+        <hr>
+
+        <p>
+            <strong>Código:</strong>
+            <%= curso.cod %>
+        </p>
+
+        <p>
+            <strong>Curso:</strong>
+            <%= curso.curso %>
+        </p>
+
+        <p>
+            <strong>Carga Horária:</strong>
+            <%= curso.ch %>
+        </p>
+
+        <p>
+            <strong>Tipo:</strong>
+            <%= curso.tipo %>
+        </p>
+
     <% }) %>
-    
+
 </body>
+
 </html>
