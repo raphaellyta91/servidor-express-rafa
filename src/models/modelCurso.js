@@ -1,61 +1,66 @@
-import fs from 'fs'
-import path from 'path'
+import { conexao } from '../database/conexao.js'
 
-const caminho = path.join(
-    import.meta.dirname,
-    '..',
-    'database',
-    'cursos.json'
-)
+export async function listarCursosBanco() {
 
-export function lerCursos() {
+    const [rows] = await conexao.query(
+        'SELECT * FROM cursos'
+    )
 
-    try {
-
-        if (!fs.existsSync(caminho)) {
-            fs.writeFileSync(caminho, '[]', 'utf-8')
-        }
-
-        const conteudo = fs.readFileSync(
-            caminho,
-            'utf-8'
-        )
-
-        if (conteudo === '') {
-            return []
-        }
-
-        return JSON.parse(conteudo)
-
-    } catch (error) {
-
-        console.error(
-            'Erro ao ler o arquivo:',
-            error
-        )
-
-        return []
-    }
+    return rows
 }
 
-export function salvarCursos(cursos) {
+export async function criarCursoBanco(
+    cod,
+    curso,
+    ch,
+    tipo
+) {
 
-    try {
+    const sql = `
+        INSERT INTO cursos
+        (cod, curso, ch, tipo)
+        VALUES (?, ?, ?, ?)
+    `
 
-        fs.writeFileSync(
-            caminho,
-            JSON.stringify(cursos, null, 2)
-        )
+    await conexao.query(
+        sql,
+        [cod, curso, ch, tipo]
+    )
+}
 
-        console.log(
-            'Arquivo JSON criado com sucesso!'
-        )
+export async function buscarCursoBanco(cod) {
 
-    } catch (error) {
+    const [rows] = await conexao.query(
+        'SELECT * FROM cursos WHERE cod = ?',
+        [cod]
+    )
 
-        console.error(
-            'Erro ao escrever o arquivo:',
-            error
-        )
-    }
+    return rows[0]
+}
+
+export async function removerCursoBanco(cod) {
+
+    await conexao.query(
+        'DELETE FROM cursos WHERE cod = ?',
+        [cod]
+    )
+}
+
+export async function atualizarCursoBanco(
+    cod,
+    curso,
+    ch,
+    tipo
+) {
+
+    const sql = `
+        UPDATE cursos
+        SET curso = ?, ch = ?, tipo = ?
+        WHERE cod = ?
+    `
+
+    await conexao.query(
+        sql,
+        [curso, ch, tipo, cod]
+    )
 }

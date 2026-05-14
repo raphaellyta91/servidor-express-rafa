@@ -8,21 +8,29 @@ const app = express()
 const PORT = 3000
 const HOST = 'localhost'
 
+// middleware
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
+// CSS
+app.use(express.static('./src/public'))
+
+// EJS
 app.set('view engine', 'ejs')
 app.set('views', './src/views')
 
+// rotas
 app.use(routeAluno)
 app.use(routeCurso)
 
+// página inicial
 app.get('/', (req, res) => {
     res.render('index', {
         nome: 'Rafa'
     })
 })
 
+// servidor
 app.listen(PORT, HOST, () => {
     console.log(`Servidor rodando em http://${HOST}:${PORT}`)
 })

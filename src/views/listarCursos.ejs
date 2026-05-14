@@ -5,35 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Cursos</title>
+
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
 
     <h1>Lista de Cursos</h1>
 
+    <a href="/">
+        ← Voltar
+    </a>
+
+    <br><br>
+
     <% cursos.forEach(curso => { %>
 
-        <hr>
+        <div class="card">
 
-        <p>
-            <strong>Código:</strong>
-            <%= curso.cod %>
-        </p>
+            <p>
+                <strong>Código:</strong>
+                <%= curso.cod %>
+            </p>
 
-        <p>
-            <strong>Curso:</strong>
-            <%= curso.curso %>
-        </p>
+            <p>
+                <strong>Curso:</strong>
+                <%= curso.curso %>
+            </p>
 
-        <p>
-            <strong>Carga Horária:</strong>
-            <%= curso.ch %>
-        </p>
+            <p>
+                <strong>Carga Horária:</strong>
+                <%= curso.ch %>
+            </p>
 
-        <p>
-            <strong>Tipo:</strong>
-            <%= curso.tipo %>
-        </p>
+            <p>
+                <strong>Tipo:</strong>
+                <%= curso.tipo %>
+            </p>
+
+        </div>
 
     <% }) %>
 
