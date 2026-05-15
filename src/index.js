@@ -2,6 +2,8 @@ import express from 'express'
 
 import routeAluno from './routes/routeAluno.js'
 import routeCurso from './routes/routeCurso.js'
+import { conexao } from './config/conexao.js'
+
 
 const app = express()
 

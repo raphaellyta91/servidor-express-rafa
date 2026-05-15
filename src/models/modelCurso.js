@@ -1,4 +1,4 @@
-import { conexao } from '../database/conexao.js'
+import { conexao } from '../config/conexao.js'
 
 export async function listarCursosBanco() {
 
