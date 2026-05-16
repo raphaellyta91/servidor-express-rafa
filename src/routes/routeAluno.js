@@ -1,26 +1,35 @@
 import express from 'express'
 
 import {
-    abrirCadastroAluno,
-    listarAlunos,
-    cadastrarAluno
+  abrirCadastroCurso,
+  cadastrarCurso,
+  listarCursos,
+  removerCurso
+} from '../controllers/controllerCurso.js'
+
+import {
+  abrirCadastroAluno,
+  cadastrarAluno,
+  listarAlunos,
+  removerAluno
 } from '../controllers/controllerAluno.js'
 
-const routeAluno = express.Router()
+const router = express.Router()
 
-routeAluno.get(
-    '/cadastro-aluno',
-    abrirCadastroAluno
-)
+router.get('/', (req, res) => {
+  res.send('<h1>Página inicial</h1>')
+})
 
-routeAluno.get(
-    '/alunos',
-    listarAlunos
-)
+// Cursos
+router.get('/cadastro', abrirCadastroCurso)
+router.post('/curso', cadastrarCurso)
+router.get('/cursos', listarCursos)
+router.get('/curso/remover/:idCurso', removerCurso)
 
-routeAluno.post(
-    '/aluno',
-    cadastrarAluno
-)
+// Alunos
+router.get('/cadastro-aluno', abrirCadastroAluno)
+router.post('/aluno', cadastrarAluno)
+router.get('/alunos', listarAlunos)
+router.get('/aluno/remover/:idAluno', removerAluno)
 
-export default routeAluno
+export default router

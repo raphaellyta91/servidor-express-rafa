@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Alunos</title>
+</head>
+<body>
+
+  <h1>Lista de Alunos</h1>
+
+  <a href="/cadastro-aluno">Cadastrar novo aluno</a>
+  <br><br>
+
+  <table border="1">
+    <tr>
+      <th>ID</th>
+      <th>Matrícula</th>
+      <th>Nome</th>
+      <th>Telefone</th>
+      <th>Email</th>
+      <th>Curso</th>
+      <th>Ação</th>
+    </tr>
+
+    <% alunos.forEach(aluno => { %>
+      <tr>
+        <td><%= aluno.idAluno %></td>
+        <td><%= aluno.matricula %></td>
+        <td><%= aluno.nome %></td>
+        <td><%= aluno.telefone %></td>
+        <td><%= aluno.email %></td>
+        <td><%= aluno.curso %></td>
+        <td>
+          <a href="/aluno/remover/<%= aluno.idAluno %>">Remover</a>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
+
+</body>
+</html>

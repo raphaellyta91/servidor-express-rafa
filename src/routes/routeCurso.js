@@ -1,50 +1,17 @@
 import express from 'express'
 
 import {
-    criarCurso,
-    listarCursos,
-    buscarCurso,
-    atualizarCurso,
-    removerCurso,
-    alterarCurso,
-    cadastroCurso
+  abrirCadastroCurso,
+  cadastrarCurso,
+  listarCursos,
+  removerCurso
 } from '../controllers/controllerCurso.js'
 
-const routeCurso = express.Router()
+const router = express.Router()
 
-routeCurso.get(
-    '/cadastro-curso',
-    cadastroCurso
-)
+router.get('/cadastro', abrirCadastroCurso)
+router.post('/curso', cadastrarCurso)
+router.get('/cursos', listarCursos)
+router.get('/curso/remover/:idCurso', removerCurso)
 
-routeCurso.post(
-    '/curso',
-    criarCurso
-)
-
-routeCurso.get(
-    '/cursos',
-    listarCursos
-)
-
-routeCurso.get(
-    '/curso/:curso',
-    buscarCurso
-)
-
-routeCurso.put(
-    '/curso/:cod',
-    atualizarCurso
-)
-
-routeCurso.delete(
-    '/curso/:cod',
-    removerCurso
-)
-
-routeCurso.patch(
-    '/curso/:cod',
-    alterarCurso
-)
-
-export default routeCurso
+export default router
