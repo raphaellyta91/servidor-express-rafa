@@ -1,18 +1,31 @@
-import express from 'express'
-import router from './routes/router.js'
+import express from 'express';
+import routeCurso from './routes/routeCurso.js';
+import path from 'path';
+import morgan from 'morgan';
+import dotenv from 'dotenv';
+import sequelize from './config/rom.js';
 
-const app = express()
+import { sincronizarBD } from './config/rom.js';
+import Curso from './models/modelCursoROM.js';
 
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
+dotenv.config();
+sincronizarBD();
 
-app.use('/', router)
+const app = express();
 
-app.set('view engine', 'ejs')
-app.set('views', './src/views')
+app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-const PORT = 3000
+app.set('view engine', 'ejs');
+app.set('views', './src/views');
+
+app.use('/', routeCurso);
+
+sincronizarBD();
+
+const PORT = 3000;
 
 app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`)
-})
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
