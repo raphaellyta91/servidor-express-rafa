@@ -6,16 +6,22 @@ export function abrirCadastroCurso(req, res) {
 }
 
 export async function cadastrarCurso(req, res) {
-  try {
+
     const { cod, curso, ch, tipo } = req.body
+    if(!cod || !curso || !ch || !tipo) {
+        return res.status(400).json({mensagem: 'Preencha todos os dados!'})
+    }
 
-    await cadastrarCursoBanco(cod, curso, ch, tipo)
+    try{
+        const cursoNovo = await Curso.create(req.body)
+        console.log(cursoNovo)
+        res.redirect('/cursos')
 
-    res.redirect('/cursos')
-  } catch (err) {
-    console.log(err)
-    res.status(500).json({ erro: err.message })
-  }
+    }catch(err){
+        console.log(err)
+        res.status(500).json({ erro: err.message})
+    }
+
 }
 
 export async function listarCursos(req, res) {
